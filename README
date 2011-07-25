@@ -1,5 +1,7 @@
 A Django application to tryout the 'url_shortify' application.
 
+THIS README IS CURRENTLY UNDER PROGRESS.
+
 MySQL Database Setup
 ====================
 create database url_shortener character set utf8;

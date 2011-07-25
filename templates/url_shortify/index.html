@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if messages %}
+<div id="id_messages">
+	<ul class="messages">
+	    {% for message in messages %}
+	    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+	    {% endfor %}
+	</ul>
+</div>
+{% endif %}
+
+<div id="url-shortify-form">
+	<form method="post">
+		{% csrf_token %}
+		{% for field in form %}
+			<div class="field">
+				{{ field.label_tag}}: {{ field }} {{ field.errors }}
+			</div>
+		{% endfor %}
+		<input id="id_submit" type="submit" value="Submit" />
+        {{ form.non_field_errors }}
+	</form>
+</div>
+
+{% if shortify %}
+<div id="id_shortified">
+	<div class="entry">
+		<span>Shortified: {{ shortify.short_string }}</span>
+		<span>Original URL: {{ shortify.original_url }}</span>
+	</div>
+</div>
+{% endif %}
+{% endblock content %}
