@@ -1,10 +1,12 @@
 from django.contrib import messages
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest,\
+    HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
 from url_shortify import utils
 from url_shortify.forms import URLShortifyForm
+from url_shortify.models import URL
 
 def index(request):
     """Index view handler.
@@ -27,3 +29,11 @@ def index(request):
         'shortify': shortify, \
     }, context_instance=RequestContext(request))
     
+def unshortify(request, short):
+    """Redirect to the original URL from a shortified one.
+    """
+    try:
+        url = URL.objects.get(short_string=short)
+    except URL.DoesNotExist:
+        raise Http404
+    return HttpResponseRedirect(url.original_url)
