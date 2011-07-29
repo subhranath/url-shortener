@@ -7,3 +7,9 @@ MySQL Database Setup
 create database url_shortener character set utf8;
 create user 'url_shortener'@'localhost' identified by 'url_shortener';
 grant all on url_shortener.* to 'url_shortener'@'localhost';
+
+TO DO List
+==========
+* User managed
+* Login using facebook
+* Login using Twitter
